@@ -1,0 +1,150 @@
+/* Global Reset and Box-sizing */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Root Variables */
+:root {
+    --orange: #F2C14E;
+    --winning-blocks: #2d414b;
+    --background-image: url('path/to/your/image.jpg'); /* Add your image path here */
+    --transition-time: 200ms;
+    --x-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    --o-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+/* Body Styling */
+body {
+    color: var(--orange);
+    font-family: 'Finger Paint', cursive;
+    background: var(--background-image) no-repeat center center fixed;
+    background-size: cover;
+    animation: backgroundAnimation 20s infinite alternate; /* Add animation for background */
+}
+
+@keyframes backgroundAnimation {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(0.8); }
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 54px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    color: #fff;
+    animation: textShadowPulse 2s infinite alternate;
+}
+
+@keyframes textShadowPulse {
+    0% { text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); }
+    100% { text-shadow: 4px 4px 10px rgba(0, 0, 0, 1); }
+}
+
+/* Container Styling */
+.container {
+    padding: 40px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.7); /* Add a translucent background for readability */
+    border-radius: 15px;
+    animation: containerEntry 1s ease-out;
+}
+
+@keyframes containerEntry {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Gameboard Styling */
+#gameboard {
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+/* Box Styling */
+.box {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    background-color: rgba(255, 255, 255, 0.1); /* Add slight transparency */
+    transition: background-color var(--transition-time), transform var(--transition-time);
+}
+
+.box:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly change background on hover */
+    transform: scale(1.05); /* Add a slight scale effect on hover */
+}
+
+.box:nth-child(3n) {
+    border-right: none;
+}
+
+.box:nth-last-child(-n+3) {
+    border-bottom: none;
+}
+
+/* Gradient Styling for X and O */
+.box::before {
+    content: attr(data-symbol);
+    background: -webkit-linear-gradient(var(--x-gradient));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimation 3s ease infinite;
+}
+
+[data-symbol="O"]::before {
+    background: -webkit-linear-gradient(var(--o-gradient));
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--orange);
+    color: #333;
+    border: 2px solid var(--orange);
+    font-size: 18px;
+    font-weight: 600;
+    transition: transform var(--transition-time), background-color var(--transition-time);
+}
+
+button:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    background-color: #e5b645;
+}
+
+/* Additional Styling for Better Appearance */
+.container h1 {
+    margin-bottom: 20px;
+}
+
+#gameboard {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    animation: gameboardEntry 1s ease-out;
+}
+
+@keyframes gameboardEntry {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
